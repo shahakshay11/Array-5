@@ -4,6 +4,9 @@ Write a program to calculate tax if Salary and Tax Brackets are given as list in
 You don’t know in the beginning how many tax brackets are there. You have to test for all of them
 """
 def calculate_tax(levels,salary):
+    """
+    Time complexity - O(number of slabs)
+    """
     prev = 0
     left = salary
     tax = 0
@@ -13,10 +16,18 @@ def calculate_tax(levels,salary):
         tax_percentage = level[1]
         salary_range = level[0]
         if not level[0]:
+            # copmuting the last slab(null case)
             return tax + left * tax_percentage
-        taxable_salary_range = min(salary_range - prev,left)
-        tax += tax_percentage * taxable_salary_range
+        #minimizing the taxable salary range based on left anf
+        taxable_salary_range = min(salary_range - prev,left) 
+
+        #compute the tax using previous amout and left salary aound
+        tax += tax_percentage * taxable_salary_range 
+
+        #updating the left salary account
         left = left - taxable_salary_range
+
+        #update prev
         prev = level[0]
         i+=1
 
